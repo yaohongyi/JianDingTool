@@ -3,7 +3,6 @@
 # 都君丨大魔王
 import re
 import winreg
-
 from PyQt5 import QtCore
 
 
@@ -46,7 +45,6 @@ class FileOperate(QtCore.QThread):
             result = re.sub(r'topLevel: (.*?),debug: (.*?),',
                             f'topLevel: {self.edition_value},debug: {self.model_value},',
                             file_content)
-            print(result)
             file.write(result)
         info = f'开发者模式【{model_info[self.model_value]}】，版本为【{edition_info[self.edition_value]}】，请重启鉴定系统！'
         self.text.emit(info)
