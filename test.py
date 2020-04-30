@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 # 都君丨大魔王
 import base64
+
 with open("icon.py","a") as f:
     f.write('class Icon(object):\n')
     f.write('\tdef __init__(self):\n')
