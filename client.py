@@ -19,8 +19,8 @@ class Client(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         '''窗口绘制'''
-        self.setFixedSize(350, 120)
-        self.setWindowTitle('鉴定版本切换工具_20200812')
+        self.setFixedSize(370, 120)
+        self.setWindowTitle('鉴定版本切换工具_20200813')
         self.setWindowIcon(QtGui.QIcon('tmp.ico'))
         os.remove('tmp.ico')
         self.client_grid = QGridLayout(self)
@@ -53,14 +53,11 @@ class Client(QWidget):
     def get_edition_value(self):
         model_value = self.button_group.checkedId()
         edition_text = self.edition_combo_box.currentText()
-        edition = {'教育版': -1, '基础版': 0, '高级版': 1, '专家版': 2}
-        edition_value = edition.get(edition_text)
-        print(edition_value)
-        return model_value, edition_value
+        return model_value, edition_text
 
     def change_edition(self):
-        model_value, edition_value = self.get_edition_value()
-        self.file_operate_thread = FileOperate(model_value, edition_value)
+        model_value, edition_text = self.get_edition_value()
+        self.file_operate_thread = FileOperate(model_value, edition_text)
         self.file_operate_thread.text.connect(self.print_log)
         self.file_operate_thread.start()
 

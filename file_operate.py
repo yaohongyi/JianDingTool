@@ -13,10 +13,10 @@ file_content = "/** -1：教育版, 0: 基础版, 1: 高级版, 2: 专家版 */\
 class FileOperate(QtCore.QThread):
     text = QtCore.pyqtSignal(str)
 
-    def __init__(self, model_value, edition_value):
+    def __init__(self, model_value, edition_text):
         super().__init__()
         self.model_value = model_value
-        self.edition_value = edition_value
+        self.edition_text = edition_text
 
     def file_operate(self):
         # 获取鉴定系统安装磁盘
@@ -35,7 +35,8 @@ class FileOperate(QtCore.QThread):
                         finally_disk = key_type[1:2]
                         break
         # 鉴定系统版本切换及模式调整
-        edition_info = ['教育版', '基础版', '高级版', '专家版']
+        edition = {'教育版': -1, '基础版': 0, '高级版': 1, '专家版': 2}
+        edition_value = edition.get(self.edition_text)
         model_info = ['关闭', '打开']
         file_path = f'{finally_disk}:\\Program Files\\voice-identify\\locConf.js'
         with open(file_path, 'w+', encoding='utf-8') as file:
@@ -43,10 +44,10 @@ class FileOperate(QtCore.QThread):
             file.seek(0)
             file.truncate()  # 清空文件
             result = re.sub(r'topLevel: (.*?),debug: (.*?),',
-                            f'topLevel: {self.edition_value},debug: {self.model_value},',
+                            f'topLevel: {edition_value},debug: {self.model_value},',
                             file_content)
             file.write(result)
-        info = f'开发者模式【{model_info[self.model_value]}】，版本为【{edition_info[self.edition_value]}】，请重启鉴定系统！'
+        info = f'开发者模式【{model_info[self.model_value]}】，版本为【{self.edition_text}】，重启鉴定系统后生效！'
         self.text.emit(info)
         return info
 
