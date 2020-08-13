@@ -20,7 +20,7 @@ class Client(QWidget):
         super().__init__(*args, **kwargs)
         '''窗口绘制'''
         self.setFixedSize(350, 120)
-        self.setWindowTitle('鉴定版本切换工具_20200430')
+        self.setWindowTitle('鉴定版本切换工具_20200812')
         self.setWindowIcon(QtGui.QIcon('tmp.ico'))
         os.remove('tmp.ico')
         self.client_grid = QGridLayout(self)
@@ -33,7 +33,7 @@ class Client(QWidget):
         self.button_group.addButton(self.on_rb, 1)
         self.edition_label = QLabel('请选择版本：')
         self.edition_combo_box = QComboBox()
-        self.edition_combo_box.addItems(['基础版', '高级版', '专家版'])
+        self.edition_combo_box.addItems(['教育版', '基础版', '高级版', '专家版'])
         self.edition_combo_box.setCurrentIndex(2)
         self.log_info = QLabel()
         self.change_button = QPushButton('切换(F10)')
@@ -52,7 +52,10 @@ class Client(QWidget):
 
     def get_edition_value(self):
         model_value = self.button_group.checkedId()
-        edition_value = self.edition_combo_box.currentIndex()
+        edition_text = self.edition_combo_box.currentText()
+        edition = {'教育版': -1, '基础版': 0, '高级版': 1, '专家版': 2}
+        edition_value = edition.get(edition_text)
+        print(edition_value)
         return model_value, edition_value
 
     def change_edition(self):

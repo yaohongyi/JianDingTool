@@ -6,7 +6,7 @@ import winreg
 from PyQt5 import QtCore
 
 
-file_content = "/** 0: 基础版, 1: 高级版, 2: 专家版 */\n" \
+file_content = "/** -1：教育版, 0: 基础版, 1: 高级版, 2: 专家版 */\n" \
                "module.exports = {topLevel: 2,debug: 1,devTools: 1};"
 
 
@@ -35,7 +35,7 @@ class FileOperate(QtCore.QThread):
                         finally_disk = key_type[1:2]
                         break
         # 鉴定系统版本切换及模式调整
-        edition_info = ['基础版', '高级版', '专家版']
+        edition_info = ['教育版', '基础版', '高级版', '专家版']
         model_info = ['关闭', '打开']
         file_path = f'{finally_disk}:\\Program Files\\voice-identify\\locConf.js'
         with open(file_path, 'w+', encoding='utf-8') as file:
