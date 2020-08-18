@@ -39,17 +39,28 @@ class FileOperate(QtCore.QThread):
         edition_value = edition.get(self.edition_text)
         model_info = ['关闭', '打开']
         file_path = f'{finally_disk}:\\Program Files\\voice-identify\\locConf.js'
-        with open(file_path, 'w+', encoding='utf-8') as file:
-            file.read()
-            file.seek(0)
-            file.truncate()  # 清空文件
-            result = re.sub(r'topLevel: (.*?),debug: (.*?),',
-                            f'topLevel: {edition_value},debug: {self.model_value},',
-                            file_content)
-            file.write(result)
-        info = f'开发者模式【{model_info[self.model_value]}】，版本为【{self.edition_text}】，重启鉴定系统后生效！'
-        self.text.emit(info)
-        return info
+        try:
+            with open(file_path, 'w+', encoding='utf-8') as file:
+                file.read()
+                file.seek(0)
+                file.truncate()  # 清空文件
+                result = re.sub(r'topLevel: (.*?),debug: (.*?),',
+                                f'topLevel: {edition_value},debug: {self.model_value},',
+                                file_content)
+                file.write(result)
+                info = f'开发者模式【{model_info[self.model_value]}】，版本为【{self.edition_text}】，重启鉴定系统后生效！'
+                self.text.emit(info)
+                return info
+        except OSError:
+            self.text.emit('切换失败，请手动将当前目录下的locConf.js拷贝到程序安装根目录！')
+            with open('./locConf.js', 'w+', encoding='utf-8') as file:
+                file.read()
+                file.seek(0)
+                file.truncate()  # 清空文件
+                result = re.sub(r'topLevel: (.*?),debug: (.*?),',
+                                f'topLevel: {edition_value},debug: {self.model_value},',
+                                file_content)
+                file.write(result)
 
     def run(self):
         self.file_operate()

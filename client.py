@@ -19,8 +19,8 @@ class Client(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         '''窗口绘制'''
-        self.setFixedSize(370, 120)
-        self.setWindowTitle('鉴定版本切换工具_20200813')
+        self.setFixedSize(385, 120)
+        self.setWindowTitle('鉴定版本切换工具_20200818')
         self.setWindowIcon(QtGui.QIcon('tmp.ico'))
         os.remove('tmp.ico')
         self.client_grid = QGridLayout(self)
