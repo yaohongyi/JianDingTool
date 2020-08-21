@@ -6,7 +6,7 @@ import winreg
 from PyQt5 import QtCore
 
 
-file_content = "/** -1：教育版, 0: 基础版, 1: 高级版, 2: 专家版 */\n" \
+file_content = "/** -1：教学版, 0: 基础版, 1: 高级版, 2: 专家版 */\n" \
                "module.exports = {topLevel: 2,debug: 1,devTools: 1};"
 
 
