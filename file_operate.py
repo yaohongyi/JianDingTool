@@ -35,7 +35,7 @@ class FileOperate(QtCore.QThread):
                         finally_disk = key_type[1:2]
                         break
         # 鉴定系统版本切换及模式调整
-        edition = {'教育版': -1, '基础版': 0, '高级版': 1, '专家版': 2}
+        edition = {'教学版': -1, '基础版': 0, '高级版': 1, '专家版': 2}
         edition_value = edition.get(self.edition_text)
         model_info = ['关闭', '打开']
         file_path = f'{finally_disk}:\\Program Files\\voice-identify\\locConf.js'

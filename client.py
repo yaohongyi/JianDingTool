@@ -33,7 +33,7 @@ class Client(QWidget):
         self.button_group.addButton(self.on_rb, 1)
         self.edition_label = QLabel('请选择版本：')
         self.edition_combo_box = QComboBox()
-        self.edition_combo_box.addItems(['教育版', '基础版', '高级版', '专家版'])
+        self.edition_combo_box.addItems(['教学版', '基础版', '高级版', '专家版'])
         self.edition_combo_box.setCurrentIndex(2)
         self.log_info = QLabel()
         self.change_button = QPushButton('切换(F10)')
